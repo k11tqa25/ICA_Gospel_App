@@ -9,7 +9,8 @@ namespace ICA_Gospel_App
         public App()
         {
             InitializeComponent();
-
+            // Render media element
+            Device.SetFlags(new string[] { "MediaElement_Experimental" });
             MainPage = new MainPage();
         }
 
