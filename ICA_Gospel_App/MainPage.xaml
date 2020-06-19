@@ -6,6 +6,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:local="clr-namespace:ICA_Gospel_App"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    NavigationPage.HasNavigationBar="False"
     mc:Ignorable="d">
     <ContentPage.Resources>
         <local:MediaLocationConverter x:Key="MediaConverter" />
@@ -63,6 +64,7 @@
                 x:Name="ShareButton"
                 Margin="20"
                 BackgroundColor="White"
+                Clicked="ShareButton_Clicked"
                 HeightRequest="60"
                 HorizontalOptions="Center"
                 Opacity=".5"

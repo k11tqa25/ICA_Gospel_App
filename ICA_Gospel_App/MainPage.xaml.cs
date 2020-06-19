@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ICA_Gospel_App.Views;
+using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -46,19 +47,20 @@ namespace ICA_Gospel_App
             AnimateToPage1Layout();
         }
 
+        private void ShareButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new SlideShowPage());
+        }
+
+        #region Animations
+
         private void AnimateToPage2Layout()
         {
-            double org_h1 = pageHeight * 3.0 / 6.0;
             double org_h2 = pageHeight * 2.0 / 6.0;
-            double org_h3 = pageHeight * 1.0 / 6.0;
             double new_h2 = pageHeight * 2.0 / 6.0;
             double new_h3 = pageHeight * 2.0 / 6.0;
             double new_h4 = pageHeight * 1.0 / 6.0;
 
-            //Animation row0 = new Animation(
-            //   v => Layout.RowDefinitions[0].Height = v,org_h1, 0, Easing.SinInOut);
-            //Animation row2 = new Animation(
-            //   v => Layout.RowDefinitions[2].Height = v, org_h3, 0, Easing.SinInOut);
             Animation row1 = new Animation(
                v => Layout.RowDefinitions[1].Height = v, org_h2, new_h2, Easing.SinInOut);
             Animation row3 = new Animation(
@@ -78,10 +80,11 @@ namespace ICA_Gospel_App
             Animation fadeIn2 = new Animation(
                 v => BackLabel.Opacity = v, 0, 1, Easing.SinInOut);
 
+            Animation zoomIn = new Animation(
+                v => BackgroundMedia.Scale = v, 1, 1.2, Easing.SinInOut);
+
             Animation parentAnimation = new Animation();
 
-            //parentAnimation.Add(0, .8, row0);
-            //parentAnimation.Add(0.1, 1, row2);
             parentAnimation.Add(.2, .7, row1);
             parentAnimation.Add(0, .8, row3);
             parentAnimation.Add(0, .8, row4);
@@ -90,8 +93,9 @@ namespace ICA_Gospel_App
             parentAnimation.Add(0, .5, fadeOut2);
             parentAnimation.Add(.5, 1, fadeIn1);
             parentAnimation.Add(.5, 1, fadeIn2);
+            parentAnimation.Add(0, .8, zoomIn);
 
-            parentAnimation.Commit(Layout, "SwitchToPage2", 16, 1000);
+            parentAnimation.Commit(Layout, "SwitchToPage2", 16, 2000, easing: Easing.SinInOut);
         }
 
         private void AnimateToPage1Layout()
@@ -101,10 +105,6 @@ namespace ICA_Gospel_App
             double org_h3 = pageHeight * 1.0 / 6.0;
             double new_h1 = pageHeight * 2.0 / 6.0;
 
-            //Animation row0 = new Animation(
-            //   v => Layout.RowDefinitions[0].Height = v,org_h1, 0, Easing.SinInOut);
-            //Animation row2 = new Animation(
-            //   v => Layout.RowDefinitions[2].Height = v, org_h3, 0, Easing.SinInOut);
             Animation row1 = new Animation(
                v => Layout.RowDefinitions[1].Height = v, org_h1, new_h1, Easing.SinInOut);
             Animation row3 = new Animation(
@@ -124,10 +124,11 @@ namespace ICA_Gospel_App
             Animation fadeOut2 = new Animation(
                 v => BackLabel.Opacity = v, 1, 0, Easing.SinInOut);
 
+            Animation zoomOut = new Animation(
+                v => BackgroundMedia.Scale = v, 1.2, 1, Easing.SinInOut);
+
             Animation parentAnimation = new Animation();
 
-            //parentAnimation.Add(0, .8, row0);
-            //parentAnimation.Add(0.1, 1, row2);
             parentAnimation.Add(.2, .7, row1);
             parentAnimation.Add(0, .8, row3);
             parentAnimation.Add(0, .8, row4);
@@ -136,9 +137,12 @@ namespace ICA_Gospel_App
             parentAnimation.Add(.5, 1, fadeIn2);
             parentAnimation.Add(0, .5, fadeOut1);
             parentAnimation.Add(0, .5, fadeOut2);
+            parentAnimation.Add(0, .8, zoomOut);
 
-            parentAnimation.Commit(Layout, "SwitchToPage1", 16, 1000);
+            parentAnimation.Commit(Layout, "SwitchToPage1", 16, 2000, easing: Easing.SinInOut);
         }
+
+        #endregion
 
     }
 }
