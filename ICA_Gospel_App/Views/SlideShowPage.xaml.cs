@@ -16,5 +16,18 @@ namespace ICA_Gospel_App.Views
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            this.FadeTo(1, 1000, Easing.SinIn);
+        }
+
+        protected async override void OnDisappearing()
+        {
+            //base.OnDisappearing();
+            await this.TranslateTo(this.Width, this.Y, 2000);
+        }
     }
 }

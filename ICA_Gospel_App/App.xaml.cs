@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ICA_Gospel_App.MessageHelpers;
+using ICA_Gospel_App.Views;
+using System;
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,10 +23,12 @@ namespace ICA_Gospel_App
 
         protected override void OnSleep()
         {
+            MessagingCenter.Send(new AppEventMesseges(), AppEventMesseges.Slept);
         }
 
         protected override void OnResume()
         {
+            MessagingCenter.Send(new AppEventMesseges(), AppEventMesseges.Resumed);
         }
     }
 }
