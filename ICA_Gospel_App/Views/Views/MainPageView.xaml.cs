@@ -1,11 +1,6 @@
 ﻿using ICA_Gospel_App.MessageHelpers;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -32,6 +27,9 @@ namespace ICA_Gospel_App.Views
             pageWidth = DeviceDisplay.MainDisplayInfo.Width / density;
 
             MessagingCenter.Subscribe<AppEventMesseges>(this, AppEventMesseges.Slept, (_ => Cover.Opacity = 1)) ;
+            MessagingCenter.Subscribe<AboutView>(this, "Back",  (s) => {
+                AboutPage.IsVisible = false;
+                FadeIn(); }) ;
         }
 
         public  void FadeIn()
@@ -39,13 +37,13 @@ namespace ICA_Gospel_App.Views
             // Render media player
             BackgroundMedia.Opacity = 0;
             Layout.Opacity = 0;
+            Layout.IsVisible = true;
 
             Cover.FadeTo(0, 2000, Easing.SinInOut);
-            Layout.ScaleTo(1, 2000, Easing.SinInOut);
+            BackgroundMedia.ScaleTo(1, 500, Easing.SinInOut);
             Layout.FadeTo(1, 2000, Easing.SinInOut);
             BackgroundMedia.Opacity = 1;
         }
-
 
         private void TeachButton_Clicked(object sender, EventArgs e)
         {
@@ -75,6 +73,14 @@ namespace ICA_Gospel_App.Views
         private void ShareButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SlideShowPage(), true);
+        }
+
+        private void GoToAboutPage_Clicked(object sender, EventArgs e)
+        {
+            Layout.IsVisible = false;
+            AboutPage.IsVisible = true;
+            AboutPage.FadeIn();
+            BackgroundMedia.ScaleTo(1.2, 500, Easing.SinInOut);
         }
 
         #region Animations
@@ -168,5 +174,6 @@ namespace ICA_Gospel_App.Views
         }
 
         #endregion
+
     }
 }

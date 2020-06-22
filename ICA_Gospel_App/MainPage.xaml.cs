@@ -13,7 +13,7 @@ namespace ICA_Gospel_App
         public MainPage()
         {
             InitializeComponent();
-                        
+
             Content = new SplashView();
             mainPageView = new MainPageView();
 
@@ -22,7 +22,7 @@ namespace ICA_Gospel_App
             Task.Run(() => RunSplash());
         }
 
-        private async void RunSplash(bool wait = true)
+        public async void RunSplash(bool wait = true)
         {
             if(wait)
                 await Task.Delay(3000);
@@ -30,8 +30,7 @@ namespace ICA_Gospel_App
             Dispatcher.BeginInvokeOnMainThread(() => { 
                 Content = mainPageView;
                 mainPageView.FadeIn();
-            });
-          
+            });          
         }
 
 

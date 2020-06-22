@@ -3,7 +3,7 @@ using System.Reflection;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ICA_Gospel_App.MarkupExtensions
+namespace ICA_Gospel_App.Extensions
 {
     [ContentProperty(nameof(Source))]
     public class ImageResource : IMarkupExtension

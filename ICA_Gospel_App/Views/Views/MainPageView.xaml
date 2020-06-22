@@ -4,9 +4,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:ext="clr-namespace:ICA_Gospel_App.MarkupExtensions"
     xmlns:local="clr-namespace:ICA_Gospel_App"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:view="clr-namespace:ICA_Gospel_App.Views"
     BackgroundColor="White"
     mc:Ignorable="d">
     <ContentView.Resources>
@@ -30,6 +30,12 @@
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="SizeProportional"
             BackgroundColor="White" />
+
+        <view:AboutView
+            x:Name="AboutPage"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="SizeProportional"
+            IsVisible="False" />
 
         <Grid
             x:Name="Layout"
@@ -107,7 +113,11 @@
                 FontSize="12"
                 HorizontalOptions="Center"
                 Text="ABOUT THE APP"
-                VerticalOptions="End" />
+                VerticalOptions="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="GoToAboutPage_Clicked" />
+                </Label.GestureRecognizers>
+            </Label>
             <!--#endregion-->
 
             <!--#region Page2 Buttons-->

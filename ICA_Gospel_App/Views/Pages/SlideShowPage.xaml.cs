@@ -24,10 +24,17 @@ namespace ICA_Gospel_App.Views
             this.FadeTo(1, 1000, Easing.SinIn);
         }
 
-        protected async override void OnDisappearing()
+        protected  override void OnDisappearing()
         {
             //base.OnDisappearing();
-            await this.TranslateTo(this.Width, this.Y, 2000);
+            this.FadeTo(0, 1000, Easing.SinIn);
+            this.ScaleTo(1.4, 1000, Easing.SinIn);
         }
+
+        private void BackButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
+
     }
 }

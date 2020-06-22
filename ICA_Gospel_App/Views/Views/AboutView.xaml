@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="ICA_Gospel_App.Views.AboutView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid
+        x:Name="Layout"
+        AbsoluteLayout.LayoutBounds="0,0,1,1"
+        AbsoluteLayout.LayoutFlags="SizeProportional">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label
+            x:Name="Title"
+            FontSize="30"
+            HorizontalOptions="Center"
+            Text="ABOUT THIS APP"
+            VerticalOptions="End" />
+
+        <AbsoluteLayout Grid.Row="1">
+            <BoxView
+                x:Name="Card"
+                AbsoluteLayout.LayoutBounds=".5, .4, .8, .9"
+                AbsoluteLayout.LayoutFlags="All"
+                BackgroundColor="LightGray"
+                CornerRadius="30"
+                Opacity=".3" />
+            <Label
+                x:Name="AboutContent"
+                Margin="10"
+                AbsoluteLayout.LayoutBounds=".5, .4, .8, .9"
+                AbsoluteLayout.LayoutFlags="All"
+                HorizontalTextAlignment="Center"
+                Text="Some text about this app..."
+                VerticalTextAlignment="Start" />
+        </AbsoluteLayout>
+
+        <Label
+            x:Name="BackLabel"
+            Grid.Row="2"
+            FontSize="30"
+            HorizontalOptions="Center"
+            Text="BACK"
+            VerticalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="BackLabel_Tapped" />
+            </Label.GestureRecognizers>
+        </Label>
+    </Grid>
+
+</ContentView>
