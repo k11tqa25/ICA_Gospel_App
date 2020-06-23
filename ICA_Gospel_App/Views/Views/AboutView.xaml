@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentView
+<views:AnimatableView
     x:Class="ICA_Gospel_App.Views.AboutView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:ICA_Gospel_App.Views"
     mc:Ignorable="d">
 
     <Grid
@@ -54,4 +55,4 @@
         </Label>
     </Grid>
 
-</ContentView>
+</views:AnimatableView>

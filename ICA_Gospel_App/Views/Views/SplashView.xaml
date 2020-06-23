@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentView
+<view:AnimatableView
     x:Class="ICA_Gospel_App.Views.SplashView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:view="clr-namespace:ICA_Gospel_App.Views"
     mc:Ignorable="d">
     <Grid BackgroundColor="Azure">
         <Label
@@ -14,4 +15,4 @@
             TextColor="Black"
             VerticalOptions="Center" />
     </Grid>
-</ContentView>
+</view:AnimatableView>

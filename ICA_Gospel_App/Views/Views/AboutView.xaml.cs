@@ -12,36 +12,40 @@ using Xamarin.Forms.Xaml;
 namespace ICA_Gospel_App.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AboutView : ContentView
+    public partial class AboutView : AnimatableView
     {
 
-        public AboutView()
+        public AboutView(): base()
         {
             InitializeComponent();
-        }
-
-        public AboutView(ContentView parentView)
-        {
-            InitializeComponent();
-        }
-
-        public void FadeIn()
-        {
-            Title.Opacity = 0;
-            BackLabel.Opacity = 0;
-            Card.ScaleY = 0.4;
-            AboutContent.Opacity = 0;
-
-            Card.ScaleYTo(1, 1000, Easing.SinInOut);
-            AboutContent.FadeTo(1, 1000, Easing.SinInOut);
-            Title.FadeTo(1, 1000, Easing.SinInOut);
-            BackLabel.FadeTo(1, 100, Easing.SinInOut);
-
         }
 
         private void BackLabel_Tapped(object sender, EventArgs e)
         {
-            MessagingCenter.Send<AboutView>( this, "Back");
+            MessagingCenter.Send<AboutView>(this, "Back");
         }
+
+        #region Override Methods
+
+        public override Task AnimateIn()
+        {
+            return Task.Run(() =>
+            {
+                // Initialize animation state
+                this.Opacity = 0;
+                Card.ScaleY = 0.4;
+
+                // Animate
+                this.FadeTo(1, 500, Easing.SinInOut); 
+                Card.ScaleYTo(1, 1000, Easing.SinInOut);
+            });
+        }
+
+        public override Task AnimateOut()
+        {
+            return base.AnimateOut();
+        }
+
+        #endregion
     }
 }

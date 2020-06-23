@@ -8,31 +8,15 @@ namespace ICA_Gospel_App
 {
     public partial class MainPage : ContentPage
     {
-        MainPageView mainPageView;
-
         public MainPage()
         {
             InitializeComponent();
 
-            Content = new SplashView();
-            mainPageView = new MainPageView();
+            Content = new ViewContainer(new MainPageView());
 
-            MessagingCenter.Subscribe<AppEventMesseges>(this, AppEventMesseges.Resumed, (_ => RunSplash(false)));
+            MessagingCenter.Subscribe<AppEventMesseges>(this, AppEventMesseges.Resumed, 
+                _ => (Content as ViewContainer).CurrentView.AnimateIn());
 
-            Task.Run(() => RunSplash());
         }
-
-        public async void RunSplash(bool wait = true)
-        {
-            if(wait)
-                await Task.Delay(3000);
-
-            Dispatcher.BeginInvokeOnMainThread(() => { 
-                Content = mainPageView;
-                mainPageView.FadeIn();
-            });          
-        }
-
-
     }
 }

@@ -1,6 +1,6 @@
 ﻿using ICA_Gospel_App.MessageHelpers;
+using ICA_Gospel_App.ViewModels.Locators;
 using System;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -9,46 +9,37 @@ using Xamarin.Forms.Xaml;
 namespace ICA_Gospel_App.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPageView : ContentView
+    public partial class MainPageView : AnimatableView
     {
         private MainPageViewModel mainPageVM;
         double density;
         double pageHeight;
         double pageWidth;
 
-        public MainPageView()
+        public MainPageView() : base()
         {
             InitializeComponent();
 
-            BindingContext = mainPageVM = MainPageViewModelLocator.MainPageViewModel;
+            BindingContext = mainPageVM = ViewModelLocators.MainPageViewModel;
 
             density = DeviceDisplay.MainDisplayInfo.Density;
             pageHeight = DeviceDisplay.MainDisplayInfo.Height / density;
             pageWidth = DeviceDisplay.MainDisplayInfo.Width / density;
 
-            MessagingCenter.Subscribe<AppEventMesseges>(this, AppEventMesseges.Slept, (_ => Cover.Opacity = 1)) ;
-            MessagingCenter.Subscribe<AboutView>(this, "Back",  (s) => {
+            MessagingCenter.Subscribe<AppEventMesseges>(this, AppEventMesseges.Slept, (_ => Cover.Opacity = 1));
+            MessagingCenter.Subscribe<AboutView>(this, "Back", (s) =>
+            {
                 AboutPage.IsVisible = false;
-                FadeIn(); }) ;
-        }
+                AnimateIn();
+            });
 
-        public  void FadeIn()
-        {
-            // Render media player
-            BackgroundMedia.Opacity = 0;
-            Layout.Opacity = 0;
-            Layout.IsVisible = true;
-
-            Cover.FadeTo(0, 2000, Easing.SinInOut);
-            BackgroundMedia.ScaleTo(1, 500, Easing.SinInOut);
-            Layout.FadeTo(1, 2000, Easing.SinInOut);
-            BackgroundMedia.Opacity = 1;
+            mViewContainer.ViewStack.Add(AboutPage);
+            mViewContainer.ViewStack.Add(MainButtonPage);
         }
 
         private void TeachButton_Clicked(object sender, EventArgs e)
         {
-            BackgroundMedia.Play();
-            AnimateToPage2Layout();
+            AnimateSlideUp();
         }
 
         private async void BackLabel_Tapped(object sender, EventArgs e)
@@ -67,7 +58,7 @@ namespace ICA_Gospel_App.Views
                 composite.Add(0, 1, fade);
                 composite.Commit(this, "LabelTouchEffect", 16, 800, Easing.SinInOut);
             });
-            AnimateToPage1Layout();
+            AnimateSlideDown();
         }
 
         private void ShareButton_Clicked(object sender, EventArgs e)
@@ -77,15 +68,16 @@ namespace ICA_Gospel_App.Views
 
         private void GoToAboutPage_Clicked(object sender, EventArgs e)
         {
-            Layout.IsVisible = false;
-            AboutPage.IsVisible = true;
-            AboutPage.FadeIn();
+            //Layout.IsVisible = false;
+            //AboutPage.IsVisible = true;
+            //AboutPage.AnimateIn();
+            
             BackgroundMedia.ScaleTo(1.2, 500, Easing.SinInOut);
         }
 
         #region Animations
 
-        private void AnimateToPage2Layout()
+        private void AnimateSlideUp()
         {
             double org_h2 = pageHeight * 2.0 / 6.0;
             double new_h2 = pageHeight * 2.0 / 6.0;
@@ -129,7 +121,7 @@ namespace ICA_Gospel_App.Views
             parentAnimation.Commit(Layout, "SwitchToPage2", 16, 2000, easing: Easing.SinInOut);
         }
 
-        private void AnimateToPage1Layout()
+        private void AnimateSlideDown()
         {
             double org_h1 = pageHeight * 2.0 / 6.0;
             double org_h2 = pageHeight * 2.0 / 6.0;
@@ -171,6 +163,32 @@ namespace ICA_Gospel_App.Views
             parentAnimation.Add(0, .8, zoomOut);
 
             parentAnimation.Commit(Layout, "SwitchToPage1", 16, 2000, easing: Easing.SinInOut);
+        }
+
+        #endregion
+
+        #region Override Methods
+
+        public override Task AnimateIn()
+        {
+            return Task.Run(()=>
+            {
+                // Initialize fade in state
+                BackgroundMedia.Opacity = 0;
+                Layout.Opacity = 0;
+                Layout.IsVisible = true;
+
+                // Animations
+                Cover.FadeTo(0, 1000, Easing.SinInOut);
+                BackgroundMedia.ScaleTo(1, 500, Easing.SinInOut);
+                Layout.FadeTo(1, 1000, Easing.SinInOut);
+                BackgroundMedia.Opacity = 1;
+            });
+        }
+
+        public override Task AnimateOut()
+        {
+            return base.AnimateOut();
         }
 
         #endregion

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentView
+<view:AnimatableView
     x:Class="ICA_Gospel_App.Views.MainPageView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -31,138 +31,144 @@
             AbsoluteLayout.LayoutFlags="SizeProportional"
             BackgroundColor="White" />
 
+        <view:ViewContainer
+            x:Name="mViewContainer"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="SizeProportional" />
+
         <view:AboutView
             x:Name="AboutPage"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
-            AbsoluteLayout.LayoutFlags="SizeProportional"
-            IsVisible="False" />
+            AbsoluteLayout.LayoutFlags="SizeProportional" />
 
-        <Grid
-            x:Name="Layout"
+        <view:AnimatableView
+            x:Name="MainButtonPage"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="SizeProportional">
-            <Grid.RowDefinitions>
-                <!--  Title  -->
-                <RowDefinition Height="3*" />
-                <!--  Page 1 Buttons  -->
-                <RowDefinition Height="2*" />
-                <!--  About  -->
-                <RowDefinition Height="*" />
-                <!--  Page2 Buttons  -->
-                <RowDefinition Height="0" />
-                <!--  Go Back  -->
-                <RowDefinition Height="0" />
-            </Grid.RowDefinitions>
+            <Grid x:Name="Layout">
+                <Grid.RowDefinitions>
+                    <!--  Title  -->
+                    <RowDefinition Height="3*" />
+                    <!--  Page 1 Buttons  -->
+                    <RowDefinition Height="2*" />
+                    <!--  About  -->
+                    <RowDefinition Height="*" />
+                    <!--  Page2 Buttons  -->
+                    <RowDefinition Height="0" />
+                    <!--  Go Back  -->
+                    <RowDefinition Height="0" />
+                </Grid.RowDefinitions>
 
-            <!--#region Title-->
-            <StackLayout
-                x:Name="Title"
-                Grid.Row="0"
-                VerticalOptions="End">
+                <!--#region Title-->
+                <StackLayout
+                    x:Name="Title"
+                    Grid.Row="0"
+                    VerticalOptions="End">
+                    <Label
+                        FontSize="40"
+                        HorizontalOptions="Center"
+                        Text="GOOD NEWS"
+                        VerticalOptions="End" />
+                    <Label
+                        Margin="0"
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        Text="powered by In Christ Alone"
+                        VerticalOptions="End" />
+                </StackLayout>
+                <!--#endregion-->
+
+                <!--#region Page1 Buttons-->
+
+                <StackLayout
+                    x:Name="Page1Buttons"
+                    Grid.Row="1"
+                    Margin="10"
+                    Orientation="Vertical">
+                    <Button
+                        x:Name="ShareButton"
+                        Margin="20"
+                        BackgroundColor="White"
+                        Clicked="ShareButton_Clicked"
+                        HeightRequest="60"
+                        HorizontalOptions="Center"
+                        Opacity=".5"
+                        Text="LET'S SHARE"
+                        VerticalOptions="Center"
+                        WidthRequest="300" />
+                    <Button
+                        x:Name="TeachButton"
+                        Margin="20"
+                        BackgroundColor="White"
+                        Clicked="TeachButton_Clicked"
+                        HeightRequest="60"
+                        HorizontalOptions="Center"
+                        Opacity=".5"
+                        Text="TEACH ME HOW"
+                        VerticalOptions="Center"
+                        WidthRequest="300" />
+                </StackLayout>
+
+                <!--#endregion-->
+
+                <!--#region About Label-->
                 <Label
-                    FontSize="40"
+                    x:Name="AboutLabel"
+                    Grid.Row="2"
+                    FontSize="12"
                     HorizontalOptions="Center"
-                    Text="GOOD NEWS"
-                    VerticalOptions="End" />
+                    Text="ABOUT THE APP"
+                    VerticalOptions="End">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="GoToAboutPage_Clicked" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <!--#endregion-->
+
+                <!--#region Page2 Buttons-->
+
+                <StackLayout
+                    x:Name="Page2Buttons"
+                    Grid.Row="3"
+                    Margin="10"
+                    Opacity="0"
+                    Orientation="Vertical">
+                    <Button
+                        Margin="20"
+                        BackgroundColor="White"
+                        HeightRequest="60"
+                        HorizontalOptions="Center"
+                        Text="HOW TO SHARE"
+                        VerticalOptions="Center"
+                        WidthRequest="300" />
+                    <Button
+                        Margin="20"
+                        BackgroundColor="White"
+                        HeightRequest="60"
+                        HorizontalOptions="Center"
+                        Text="Q_A"
+                        VerticalOptions="Center"
+                        WidthRequest="300" />
+                </StackLayout>
+                <!--#endregion-->
+
+                <!--#region Back Label-->
                 <Label
-                    Margin="0"
-                    FontSize="14"
+                    x:Name="BackLabel"
+                    Grid.Row="4"
+                    FontSize="30"
                     HorizontalOptions="Center"
-                    Text="powered by In Christ Alone"
-                    VerticalOptions="End" />
-            </StackLayout>
-            <!--#endregion-->
+                    Opacity="0"
+                    Text="BACK"
+                    VerticalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BackLabel_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
 
-            <!--#region Page1 Buttons-->
+                <!--#endregion-->
 
-            <StackLayout
-                x:Name="Page1Buttons"
-                Grid.Row="1"
-                Margin="10"
-                Orientation="Vertical">
-                <Button
-                    x:Name="ShareButton"
-                    Margin="20"
-                    BackgroundColor="White"
-                    Clicked="ShareButton_Clicked"
-                    HeightRequest="60"
-                    HorizontalOptions="Center"
-                    Opacity=".5"
-                    Text="LET'S SHARE"
-                    VerticalOptions="Center"
-                    WidthRequest="300" />
-                <Button
-                    x:Name="TeachButton"
-                    Margin="20"
-                    BackgroundColor="White"
-                    Clicked="TeachButton_Clicked"
-                    HeightRequest="60"
-                    HorizontalOptions="Center"
-                    Opacity=".5"
-                    Text="TEACH ME HOW"
-                    VerticalOptions="Center"
-                    WidthRequest="300" />
-            </StackLayout>
-
-            <!--#endregion-->
-
-            <!--#region About Label-->
-            <Label
-                x:Name="AboutLabel"
-                Grid.Row="2"
-                FontSize="12"
-                HorizontalOptions="Center"
-                Text="ABOUT THE APP"
-                VerticalOptions="End">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="GoToAboutPage_Clicked" />
-                </Label.GestureRecognizers>
-            </Label>
-            <!--#endregion-->
-
-            <!--#region Page2 Buttons-->
-
-            <StackLayout
-                x:Name="Page2Buttons"
-                Grid.Row="3"
-                Margin="10"
-                Opacity="0"
-                Orientation="Vertical">
-                <Button
-                    Margin="20"
-                    BackgroundColor="White"
-                    HeightRequest="60"
-                    HorizontalOptions="Center"
-                    Text="HOW TO SHARE"
-                    VerticalOptions="Center"
-                    WidthRequest="300" />
-                <Button
-                    Margin="20"
-                    BackgroundColor="White"
-                    HeightRequest="60"
-                    HorizontalOptions="Center"
-                    Text="Q_A"
-                    VerticalOptions="Center"
-                    WidthRequest="300" />
-            </StackLayout>
-            <!--#endregion-->
-
-            <!--#region Back Label-->
-            <Label
-                x:Name="BackLabel"
-                Grid.Row="4"
-                FontSize="30"
-                HorizontalOptions="Center"
-                Opacity="0"
-                Text="BACK"
-                VerticalOptions="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="BackLabel_Tapped" />
-                </Label.GestureRecognizers>
-            </Label>
-
-            <!--#endregion-->
-
-        </Grid>
+            </Grid>
+        </view:AnimatableView>
     </AbsoluteLayout>
-</ContentView>
+</view:AnimatableView>
