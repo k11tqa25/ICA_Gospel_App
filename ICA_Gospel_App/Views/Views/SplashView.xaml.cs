@@ -1,40 +1,35 @@
-﻿
-using ICA_Gospel_App.Extensions;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using Xamarin.Forms.Xaml;
 
 namespace ICA_Gospel_App.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SplashView : AnimatableView
+    public partial class SplashView : NavigatableView
     {
 
         public SplashView() : base()
         {
             InitializeComponent();
+
+            Splash();
+
         }
 
-
-
-        #region Override Methods
-
-        public override Task AnimateIn()
+        private void Splash()
         {
-            return Task.Run(() =>
+            Task.Run(() =>
             {
-                Thread.Sleep(3000);
+                Task run = new Task(() =>
+                {
+                    Thread.Sleep(1000);
+                });
+                run.Start();
+                run.Wait();
+                Dispatcher.BeginInvokeOnMainThread(() => Parent.PushViewAsync(new MainPageView(), DefaultAnimationBehavior.FadeInOut, true));
+            });
 
-                this.PushViewAnyc(new MainPageView());
-            });             
         }
 
-        public override Task AnimateOut()
-        {
-            return base.AnimateOut();
-        }
-
-        #endregion
     }
 }

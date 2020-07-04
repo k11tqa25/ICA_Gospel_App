@@ -9,9 +9,11 @@ using Xamarin.Forms.Xaml;
 namespace ICA_Gospel_App.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPageView : AnimatableView
+    public partial class MainPageView : NavigatableView
     {
         private MainPageViewModel mainPageVM;
+        private Animation BackgroundScaleUp = new Animation();
+        private Animation BackgroundScaleDown = new Animation();
         double density;
         double pageHeight;
         double pageWidth;
@@ -29,12 +31,10 @@ namespace ICA_Gospel_App.Views
             MessagingCenter.Subscribe<AppEventMesseges>(this, AppEventMesseges.Slept, (_ => Cover.Opacity = 1));
             MessagingCenter.Subscribe<AboutView>(this, "Back", (s) =>
             {
-                AboutPage.IsVisible = false;
-                AnimateIn();
+                mViewContainer.SwitchView(mMainButtonView, true, false, null);
             });
 
-            mViewContainer.ViewStack.Add(AboutPage);
-            mViewContainer.ViewStack.Add(MainButtonPage);
+            InitializeBackgroundResizeAnimation();
         }
 
         private void TeachButton_Clicked(object sender, EventArgs e)
@@ -68,14 +68,16 @@ namespace ICA_Gospel_App.Views
 
         private void GoToAboutPage_Clicked(object sender, EventArgs e)
         {
-            //Layout.IsVisible = false;
-            //AboutPage.IsVisible = true;
-            //AboutPage.AnimateIn();
-            
-            BackgroundMedia.ScaleTo(1.2, 500, Easing.SinInOut);
+            mViewContainer.SwitchView(mAboutView, true, false, BackgroundScaleUp);
         }
 
         #region Animations
+
+        private void InitializeBackgroundResizeAnimation()
+        {
+            BackgroundScaleUp = new Animation(v => BackgroundMedia.Scale = v, 1, 1.2, Easing.SinInOut);
+            BackgroundScaleDown = new Animation(v => BackgroundMedia.Scale = v, 1.2, 1, Easing.SinInOut);
+        }
 
         private void AnimateSlideUp()
         {
@@ -169,27 +171,22 @@ namespace ICA_Gospel_App.Views
 
         #region Override Methods
 
-        public override Task AnimateIn()
-        {
-            return Task.Run(()=>
-            {
-                // Initialize fade in state
-                BackgroundMedia.Opacity = 0;
-                Layout.Opacity = 0;
-                Layout.IsVisible = true;
+        //public override Task AnimateInAsCurrentView()
+        //{
+        //    return Task.Run(() =>
+        //    {
+        //        // Initialize fade in state
+        //        BackgroundMedia.Opacity = 0;
+        //        Layout.Opacity = 0;
+        //        Layout.IsVisible = true;
 
-                // Animations
-                Cover.FadeTo(0, 1000, Easing.SinInOut);
-                BackgroundMedia.ScaleTo(1, 500, Easing.SinInOut);
-                Layout.FadeTo(1, 1000, Easing.SinInOut);
-                BackgroundMedia.Opacity = 1;
-            });
-        }
-
-        public override Task AnimateOut()
-        {
-            return base.AnimateOut();
-        }
+        //        // Animations
+        //        Cover.FadeTo(0, 1000, Easing.SinInOut);
+        //        BackgroundMedia.ScaleTo(1, 500, Easing.SinInOut);
+        //        Layout.FadeTo(1, 1000, Easing.SinInOut);
+        //        BackgroundMedia.Opacity = 1;
+        //    });
+        //}
 
         #endregion
 

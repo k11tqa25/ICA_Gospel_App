@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICA_Gospel_App.Android", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICA_Gospel_App.iOS", "ICA_Gospel_App.iOS\ICA_Gospel_App.iOS.csproj", "{D5804AD4-1800-49A4-A107-BAD23A184333}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICA_Gospel_App", "ICA_Gospel_App\ICA_Gospel_App.csproj", "{3EB3F36A-2263-4656-8F19-AEC0775D1E25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ICA_Gospel_App", "ICA_Gospel_App\ICA_Gospel_App.csproj", "{3EB3F36A-2263-4656-8F19-AEC0775D1E25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

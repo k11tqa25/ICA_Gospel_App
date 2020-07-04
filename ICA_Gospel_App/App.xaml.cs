@@ -1,9 +1,5 @@
 ﻿using ICA_Gospel_App.MessageHelpers;
-using ICA_Gospel_App.Views;
-using System;
-using System.Diagnostics;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace ICA_Gospel_App
 {

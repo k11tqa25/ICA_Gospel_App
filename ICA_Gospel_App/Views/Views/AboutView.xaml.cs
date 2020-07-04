@@ -1,9 +1,4 @@
-﻿using ICA_Gospel_App.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -12,10 +7,10 @@ using Xamarin.Forms.Xaml;
 namespace ICA_Gospel_App.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AboutView : AnimatableView
+    public partial class AboutView : NavigatableView
     {
 
-        public AboutView(): base()
+        public AboutView() : base()
         {
             InitializeComponent();
         }
@@ -27,7 +22,7 @@ namespace ICA_Gospel_App.Views
 
         #region Override Methods
 
-        public override Task AnimateIn()
+        public override Task AnimateInAsCurrentView()
         {
             return Task.Run(() =>
             {
@@ -36,14 +31,9 @@ namespace ICA_Gospel_App.Views
                 Card.ScaleY = 0.4;
 
                 // Animate
-                this.FadeTo(1, 500, Easing.SinInOut); 
+                this.FadeTo(1, 500, Easing.SinInOut);
                 Card.ScaleYTo(1, 1000, Easing.SinInOut);
             });
-        }
-
-        public override Task AnimateOut()
-        {
-            return base.AnimateOut();
         }
 
         #endregion

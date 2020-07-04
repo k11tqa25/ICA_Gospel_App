@@ -26,27 +26,5 @@ namespace ICA_Gospel_App.Extensions
             return null;
         }
 
-
-        /// <summary>
-        /// Gets the view to which an element belongs
-        /// </summary>
-        /// <returns>The view.</returns>
-        /// <param name="element">Element.</param>
-        public static View GetParentView(this VisualElement element)
-        {
-            if (element != null)
-            {
-                var parent = element.Parent;
-                while (parent != null)
-                {
-                    if (parent is View)
-                    {
-                        return parent as View;
-                    }
-                    parent = parent.Parent;
-                }
-            }
-            return null;
-        }
     }
 }
