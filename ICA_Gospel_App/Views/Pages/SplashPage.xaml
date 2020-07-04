@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
-<views:NavigatableView
-    x:Class="ICA_Gospel_App.Views.SplashView"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ICA_Gospel_App.Views.SplashPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:views="clr-namespace:ICA_Gospel_App.Views"
+    NavigationPage.HasNavigationBar="False"
     mc:Ignorable="d">
     <Grid BackgroundColor="Azure">
         <Label
@@ -16,4 +16,4 @@
             TextColor="Black"
             VerticalOptions="Center" />
     </Grid>
-</views:NavigatableView>
+</ContentPage>

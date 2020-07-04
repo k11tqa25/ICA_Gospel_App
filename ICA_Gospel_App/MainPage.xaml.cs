@@ -1,26 +1,31 @@
 ﻿using ICA_Gospel_App.MessageHelpers;
 using ICA_Gospel_App.Views;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ICA_Gospel_App
 {
-    public partial class MainPage : ContentPage
-    {
-        ViewContainer vc = new ViewContainer();
-
-        public MainPage()
+        public partial class MainPage : ContentPage
         {
-            InitializeComponent();
+                ViewContainer vc = new ViewContainer();
+                MainPageView mainPageView;
+                SplashPage splash;
 
-            Content = vc;
+                public MainPage()
+                {
+                        InitializeComponent();
+                        splash = new SplashPage(this);
+                        mainPageView = new MainPageView();
+                        Navigation.PushAsync(mainPageView);
+                        //Navigation.InsertPageBefore(mainPageView, splash);
+                        Navigation.PushAsync(splash);
 
-            // push the first view to the view container
-            Task.Run(() => vc.PushViewAsync(new SplashView(), DefaultAnimationBehavior.FadeInOut));
+                        MessagingCenter.Subscribe<AppEventMesseges>(this, AppEventMesseges.Resumed,
+                            async _ => await vc.SwitchView(vc.CurrentView, true, false, null));
+                }
 
-            MessagingCenter.Subscribe<AppEventMesseges>(this, AppEventMesseges.Resumed,
-                async _ => await vc.SwitchView(vc.CurrentView, true, false, null));
-
+                public void StartMainPage()
+                {
+                        mainPageView.AnimateIn();
+                }
         }
-    }
 }

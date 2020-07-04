@@ -61,22 +61,35 @@ namespace ICA_Gospel_App
                                 Animation totalAnimtaion = new Animation();
                                 Animation currentViewAnimtaion = new Animation();
                                 Animation previousViewAnimation = new Animation();
+                                double scaleSmall = currentView.DefaultScaleFromSmallerRatio;
+                                double scaleLarge = currentView.DefaultScaleFromLargerRatio;
+                                double fadeOutOP = currentView.DefaultFadeOutOpacity;
 
                                 switch (animationBehaviour)
                                 {
                                         case DefaultAnimationBehavior.FadeInOut:
-                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? 0 : 1, AnimateIn ? 1 : 0, Easing.SinInOut);
+                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? fadeOutOP : 1, AnimateIn ? 1 : fadeOutOP, Easing.SinInOut);
                                                 if (previousView != null)
-                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : 0, AnimateIn ? 0 : 1, Easing.SinInOut);
+                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : fadeOutOP, AnimateIn ? fadeOutOP : 1, Easing.SinInOut);
                                                 break;
 
-                                        case DefaultAnimationBehavior.ScaleAndFadeInOut:
-                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? 0 : 1, AnimateIn ? 1 : 0, Easing.SinInOut);
-                                                currentViewAnimtaion.Add(0, 1, new Animation(v => currentView.Scale = v, AnimateIn ? 1.2 : 1, AnimateIn ? 1 : 1.2, Easing.SinInOut));
+                                        case DefaultAnimationBehavior.ScaleFromSmallAndFadeInOut:
+                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? fadeOutOP : 1, AnimateIn ? 1 : fadeOutOP, Easing.SinInOut);
+                                                currentViewAnimtaion.Add(0, 1, new Animation(v => currentView.Scale = v, AnimateIn ? scaleSmall : 1, AnimateIn ? 1 : scaleLarge, Easing.SinInOut));
                                                 if (previousView != null)
                                                 {
-                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : 0, AnimateIn ? 0 : 1, Easing.SinInOut);
-                                                        previousViewAnimation.Add(0, 1, new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : 1.2, AnimateIn ? 1.2 : 1, Easing.SinInOut));
+                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : fadeOutOP, AnimateIn ? fadeOutOP : 1, Easing.SinInOut);
+                                                        previousViewAnimation.Add(0, 1, new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : scaleSmall, AnimateIn ? scaleLarge : 1, Easing.SinInOut));
+                                                }
+                                                break;
+
+                                        case DefaultAnimationBehavior.ScaleFromLargeAndFadeInOut:
+                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? fadeOutOP : 1, AnimateIn ? 1 : fadeOutOP, Easing.SinInOut);
+                                                currentViewAnimtaion.Add(0, 1, new Animation(v => currentView.Scale = v, AnimateIn ? scaleLarge : 1, AnimateIn ? 1 : scaleLarge, Easing.SinInOut));
+                                                if (previousView != null)
+                                                {
+                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : fadeOutOP, AnimateIn ? fadeOutOP : 1, Easing.SinInOut);
+                                                        previousViewAnimation.Add(0, 1, new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : scaleLarge, AnimateIn ? scaleLarge : 1, Easing.SinInOut));
                                                 }
                                                 break;
 
@@ -117,52 +130,52 @@ namespace ICA_Gospel_App
                                                 break;
 
                                         case DefaultAnimationBehavior.FadeAndSlideInOutFromLeft:
-                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? 0 : 1, AnimateIn ? 1 : 0, Easing.SinInOut);
+                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? fadeOutOP : 1, AnimateIn ? 1 : fadeOutOP, Easing.SinInOut);
                                                 currentViewAnimtaion.Add(0, 1, new Animation(
                                                         v => currentView.TranslationX = v, AnimateIn ? currentView.Width : 0, AnimateIn ? 0 : currentView.Width, Easing.SinInOut));
 
                                                 if (previousView != null)
                                                 {
-                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : 0, AnimateIn ? 0 : 1, Easing.SinInOut);
+                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : fadeOutOP, AnimateIn ? fadeOutOP : 1, Easing.SinInOut);
                                                         previousViewAnimation.Add(0, 1, new Animation(
                                                                 v => previousView.TranslationX = v, AnimateIn ? 0 : -previousView.Width, AnimateIn ? -previousView.Width : 0, Easing.SinInOut));
                                                 }
                                                 break;
 
                                         case DefaultAnimationBehavior.FadeAndSlideInOutFromRight:
-                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? 0 : 1, AnimateIn ? 1 : 0, Easing.SinInOut);
+                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? fadeOutOP : 1, AnimateIn ? 1 : fadeOutOP, Easing.SinInOut);
                                                 currentViewAnimtaion.Add(0, 1, new Animation(
                                                         v => currentView.TranslationX = v, AnimateIn ? -currentView.Width : 0, AnimateIn ? 0 : -currentView.Width, Easing.SinInOut));
 
                                                 if (previousView != null)
                                                 {
-                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : 0, AnimateIn ? 0 : 1, Easing.SinInOut);
+                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : fadeOutOP, AnimateIn ? fadeOutOP : 1, Easing.SinInOut);
                                                         previousViewAnimation.Add(0, 1, new Animation(
                                                                 v => previousView.TranslationX = v, AnimateIn ? 0 : previousView.Width, AnimateIn ? previousView.Width : 0, Easing.SinInOut));
                                                 }
                                                 break;
 
                                         case DefaultAnimationBehavior.FadeAndSlideInOutFromTop:
-                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? 0 : 1, AnimateIn ? 1 : 0, Easing.SinInOut);
+                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? fadeOutOP : 1, AnimateIn ? 1 : fadeOutOP, Easing.SinInOut);
                                                 currentViewAnimtaion.Add(0, 1, new Animation(
                                                         v => currentView.TranslationY = v, AnimateIn ? currentView.Height : 0, AnimateIn ? 0 : currentView.Height, Easing.SinInOut));
 
                                                 if (previousView != null)
                                                 {
-                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : 0, AnimateIn ? 0 : 1, Easing.SinInOut);
+                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : fadeOutOP, AnimateIn ? fadeOutOP : 1, Easing.SinInOut);
                                                         previousViewAnimation.Add(0, 1, new Animation(
                                                                 v => previousView.TranslationY = v, AnimateIn ? 0 : -previousView.Height, AnimateIn ? -previousView.Height : 0, Easing.SinInOut));
                                                 }
                                                 break;
 
                                         case DefaultAnimationBehavior.FadeAndSlideInOutFromBottom:
-                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? 0 : 1, AnimateIn ? 1 : 0, Easing.SinInOut);
+                                                currentViewAnimtaion = new Animation(v => currentView.Opacity = v, AnimateIn ? fadeOutOP : 1, AnimateIn ? 1 : fadeOutOP, Easing.SinInOut);
                                                 currentViewAnimtaion.Add(0, 1, new Animation(
                                                         v => currentView.TranslationY = v, AnimateIn ? -currentView.Height : 0, AnimateIn ? 0 : -currentView.Height, Easing.SinInOut));
 
                                                 if (previousView != null)
                                                 {
-                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : 0, AnimateIn ? 0 : 1, Easing.SinInOut);
+                                                        previousViewAnimation = new Animation(v => previousView.Opacity = v, AnimateIn ? 1 : fadeOutOP, AnimateIn ? fadeOutOP : 1, Easing.SinInOut);
                                                         previousViewAnimation.Add(0, 1, new Animation(
                                                                 v => previousView.TranslationY = v, AnimateIn ? 0 : previousView.Height, AnimateIn ? previousView.Height : 0, Easing.SinInOut));
                                                 }
@@ -175,7 +188,7 @@ namespace ICA_Gospel_App
                                 if (previousView != null) totalAnimtaion.Add(0, 1, previousViewAnimation);
 
                                 // do the animtion
-                                if (animation) totalAnimtaion.Commit(currentView, nameof(DefaultTransitioning), 16, 1000, Easing.SinInOut);
+                                if (animation) totalAnimtaion.Commit(currentView, nameof(DefaultTransitioning), 16, duration, Easing.SinInOut);
                         });
                 }
         }

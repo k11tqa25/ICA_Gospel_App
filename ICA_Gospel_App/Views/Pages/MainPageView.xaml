@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<views:NavigatableView
+<ContentPage
     x:Class="ICA_Gospel_App.Views.MainPageView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -8,10 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:ICA_Gospel_App.Views"
     BackgroundColor="Azure"
+    NavigationPage.HasNavigationBar="False"
     mc:Ignorable="d">
-    <ContentView.Resources>
+    <ContentPage.Resources>
         <local:MediaLocationConverter x:Key="MediaConverter" />
-    </ContentView.Resources>
+    </ContentPage.Resources>
 
     <AbsoluteLayout>
         <!--  Background media  -->
@@ -178,4 +179,4 @@
             </views:ViewContainer.ItemSource>
         </views:ViewContainer>
     </AbsoluteLayout>
-</views:NavigatableView>
+</ContentPage>

@@ -8,9 +8,14 @@
                 FadeInOut,
 
                 /// <summary>
+                /// Scale the new view from slightly smaller size to the normal size, and fade in/out from the center
+                /// </summary>
+                ScaleFromSmallAndFadeInOut,
+
+                /// <summary>
                 /// Scale the new view from slightly larger size to the normal size, and fade in/out from the center
                 /// </summary>
-                ScaleAndFadeInOut,
+                ScaleFromLargeAndFadeInOut,
 
                 /// <summary>
                 /// Slide in/Out the new view from the left.
