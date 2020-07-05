@@ -60,7 +60,7 @@ namespace ICA_Gospel_App.Views
                         return Task.Run(() => { return; });
                 }
 
-                public Task AnimateOutAsPreviousView()
+                public virtual Task AnimateOutAsPreviousView()
                 {
                         return Task.Run(() => { return; });
                 }

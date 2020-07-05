@@ -180,6 +180,10 @@ namespace ICA_Gospel_App
                                                                 v => previousView.TranslationY = v, AnimateIn ? 0 : previousView.Height, AnimateIn ? previousView.Height : 0, Easing.SinInOut));
                                                 }
                                                 break;
+
+                                        default:
+                                                animation = false;
+                                                break;
                                 }
 
                                 if (otherAnimations != null) totalAnimtaion.Add(0, 1, otherAnimations);
@@ -187,7 +191,7 @@ namespace ICA_Gospel_App
                                 totalAnimtaion.Add(0, 1, currentViewAnimtaion);
                                 if (previousView != null) totalAnimtaion.Add(0, 1, previousViewAnimation);
 
-                                // do the animtion
+                                // do the animtion if needed
                                 if (animation) totalAnimtaion.Commit(currentView, nameof(DefaultTransitioning), 16, duration, Easing.SinInOut);
                         });
                 }

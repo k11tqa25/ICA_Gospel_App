@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:NavigatableView
+    x:Class="ICA_Gospel_App.Views.PortraitView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:ICA_Gospel_App.Views"
+    BackgroundColor="#6ECFC8"
+    mc:Ignorable="d">
+    <ContentView.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <lottie:AnimationView
+                Animation="SwitchOrientation.json"
+                AutoPlay="True"
+                HeightRequest="300"
+                HorizontalOptions="Center"
+                Loop="True"
+                Rotation="90"
+                RotationY="20"
+                VerticalOptions="Center"
+                WidthRequest="300" />
+            <Label
+                HorizontalOptions="Center"
+                Text="Please change to landscape view."
+                VerticalOptions="Center" />
+        </StackLayout>
+    </ContentView.Content>
+</views:NavigatableView>

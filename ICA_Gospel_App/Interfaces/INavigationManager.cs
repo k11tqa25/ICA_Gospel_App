@@ -8,6 +8,16 @@ namespace ICA_Gospel_App
         public interface INavigationManager
         {
                 /// <summary>
+                /// Store other animation so that it can be used in many places.
+                /// </summary>
+                Animation OtherAnimations { get; set; }
+
+                /// <summary>
+                /// Store the reverse of other animations so that it can be used in many places.
+                /// </summary>
+                Animation OtherAnimationsReverse { get; set; } 
+
+                /// <summary>
                 /// Push a view to the stack with customized animation.
                 /// </summary>
                 /// <param name="view">The view to be push to the stack</param>
@@ -51,7 +61,18 @@ namespace ICA_Gospel_App
                 /// <param name="animateOut">True to animate out the current view</param>
                 /// <param name="otherAnimation">Other animations that need to be incorporate.</param>
                 /// <returns></returns>
-                Task SwitchView(NavigatableView view, bool animateIn, bool animateOut, Animation otherAnimations);
+                Task SwitchView(NavigatableView view, bool animateIn = false, bool animateOut = false, Animation otherAnimations = null);
+
+                /// <summary>
+                /// Set certain view to become the view to display.
+                /// </summary>
+                /// <param name="view">The view to display</param>
+                /// <param name="defaultAnimation">Switch view with default animations</param>
+                /// <param name="animateIn">True to animate in the new view.</param>
+                /// <param name="animateOut">True to animate out the current view</param>
+                /// <param name="otherAnimations">Other animations that need to be incorporate.</param>
+                /// <returns></returns>
+                Task SwitchView(NavigatableView view, DefaultAnimationBehavior defaultAnimation, bool animateIn = false, bool animateOut = false, Animation otherAnimations = null);
 
                 /// <summary>
                 /// Set certain index view to become the view to display by index.
@@ -59,9 +80,9 @@ namespace ICA_Gospel_App
                 /// <param name="index">The index of the view to display</param>
                 /// <param name="animateIn">True to animate in the new view.</param>
                 /// <param name="animateOut">True to animate out the current view</param>
-                /// <param name="otherAnimation">Other animations that need to be incorporate.</param>
+                /// <param name="otherAnimations">Other animations that need to be incorporate.</param>
                 /// <returns></returns>
-                Task SwitchView(int index, bool animateIn, bool animateOut, Animation otherAnimations);
+                Task SwitchView(int index, bool animateIn = false, bool animateOut = false, Animation otherAnimations = null);
 
                 /// <summary>
                 /// Pop out the current view from the stack. If this is the last view,  this will fail an throw an exception.
@@ -81,5 +102,15 @@ namespace ICA_Gospel_App
                 /// <param name="otherAnimations">Other animations that need to be incorporate.</param>
                 /// <returns></returns>
                 Task PopViewAsync(DefaultAnimationBehavior defaultAnimation, bool animateIn = false, bool animateOut = true, Animation otherAnimations = null);
+
+                /// <summary>
+                /// Go back to previous view.
+                /// </summary>
+                /// <param name="defaultAnimation">Set to none if you want to use the custom animation.</param>
+                /// <param name="animateIn">True to animate in the new view.</param>
+                /// <param name="animateOut">True to animate out the current view.</param>
+                /// <param name="otherAnimations">Other animations that need to be incorporate.</param>
+                /// <returns></returns>
+                Task BackToPrevious(DefaultAnimationBehavior defaultAnimation = DefaultAnimationBehavior.None, bool animateIn = true, bool animateOut = false, Animation otherAnimations = null); 
         }
 }

@@ -12,8 +12,6 @@ namespace ICA_Gospel_App.Views
         public partial class MainPageView : ContentPage
         {
                 private MainPageViewModel mainPageVM;
-                private Animation BackgroundScaleUp = new Animation();
-                private Animation BackgroundScaleDown = new Animation();
                 double density;
                 double pageHeight;
                 double pageWidth;
@@ -29,14 +27,20 @@ namespace ICA_Gospel_App.Views
                         pageWidth = DeviceDisplay.MainDisplayInfo.Width / density;
 
                         MessagingCenter.Subscribe<AppEventMesseges>(this, AppEventMesseges.Slept, (_ => Cover.Opacity = 1));
-                        MessagingCenter.Subscribe<AboutView>(this, "Back", (s) =>
-                        {
-                                mViewContainer.SwitchView(mMainButtonView, true, false, null);
-                        });
+                        //MessagingCenter.Subscribe<AboutView>(this, "Back", (s) =>
+                        //{
+                        //        mViewContainer.SwitchView(mMainButtonView, true, false, null);
+                        //});
 
+                        SetupBackgroundAnimations();
                         BackgroundMedia.Play();
                 }
 
+                private void SetupBackgroundAnimations()
+                {
+                        mViewContainer.OtherAnimations = new Animation(v => BackgroundMedia.Scale = v, 1, 1.3, Easing.SinInOut);
+                        mViewContainer.OtherAnimationsReverse = new Animation(v => BackgroundMedia.Scale = v, 1.3, 1, Easing.SinInOut);
+                }
 
                 private void TeachButton_Clicked(object sender, EventArgs e)
                 {
@@ -62,14 +66,20 @@ namespace ICA_Gospel_App.Views
                         AnimateSlideDown();
                 }
 
-                private void ShareButton_Clicked(object sender, EventArgs e)
+                private async void ShareButton_Clicked(object sender, EventArgs e)
                 {
-                        Navigation.PushAsync(new SlideShowPage(), true);
+                        ChangeOrientationPage orientationPage = new ChangeOrientationPage();
+                        await Navigation.PushAsync(orientationPage);
                 }
 
-                private void GoToAboutPage_Clicked(object sender, EventArgs e)
+                private async void GoToAboutPage_Clicked(object sender, EventArgs e)
                 {
-                        mViewContainer.SwitchView(mAboutView, true, false, BackgroundScaleUp);
+                        SetupBackgroundAnimations();
+                        await mViewContainer.SwitchView(mAboutView,
+                         DefaultAnimationBehavior.FadeInOut,
+                         animateIn: true,
+                         animateOut: true,
+                         otherAnimations: mViewContainer.OtherAnimations);
                 }
 
                 #region Animations
@@ -181,19 +191,16 @@ namespace ICA_Gospel_App.Views
 
                 public void AnimateIn()
                 {
-                        Task.Run(() =>
-                        {
-                                // Initialize fade in state
-                                BackgroundMedia.Opacity = 0;
-                                Layout.Opacity = 0;
-                                Layout.IsVisible = true;
+                        // Initialize fade in state
+                        BackgroundMedia.Opacity = 0;
+                        Layout.Opacity = 0;
+                        Layout.IsVisible = true;
 
-                                // Animations
-                                Cover.FadeTo(0, 1000, Easing.SinInOut);
-                                BackgroundMedia.ScaleTo(1, 500, Easing.SinInOut);
-                                Layout.FadeTo(1, 1000, Easing.SinInOut);
-                                BackgroundMedia.Opacity = 1;
-                        });
+                        // Animations
+                        Cover.FadeTo(0, 1000, Easing.SinInOut);
+                        BackgroundMedia.ScaleTo(1, 500, Easing.SinInOut);
+                        Layout.FadeTo(1, 1000, Easing.SinInOut);
+                        BackgroundMedia.Opacity = 1;
                 }
 
                 #endregion

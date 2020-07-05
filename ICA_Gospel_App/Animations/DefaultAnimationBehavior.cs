@@ -56,5 +56,10 @@
                 /// Fade and slide in/out the new view from the bottom
                 /// </summary>
                 FadeAndSlideInOutFromBottom,
+
+                /// <summary>
+                /// No animation
+                /// </summary>
+                None,
         }
 }

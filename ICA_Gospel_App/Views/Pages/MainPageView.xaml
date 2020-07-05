@@ -23,6 +23,7 @@
             AbsoluteLayout.LayoutFlags="SizeProportional"
             Aspect="AspectFill"
             AutoPlay="True"
+            InputTransparent="True"
             IsVisible="True"
             Source="{Binding BackgroundMediaSource, Converter={StaticResource MediaConverter}}" />
 
@@ -31,7 +32,8 @@
             x:Name="Cover"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="SizeProportional"
-            BackgroundColor="White" />
+            BackgroundColor="White"
+            InputTransparent="True" />
 
         <!--  A view container for the about view and main button view  -->
         <views:ViewContainer
@@ -41,10 +43,11 @@
             <views:ViewContainer.ItemSource>
 
                 <!--  About this app  -->
-                <views:NavigatableView
+                <views:AboutView
                     x:Name="mAboutView"
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
-                    AbsoluteLayout.LayoutFlags="SizeProportional" />
+                    AbsoluteLayout.LayoutFlags="SizeProportional"
+                    Opacity="0" />
 
                 <!--  Main button view  -->
                 <views:NavigatableView
@@ -118,17 +121,15 @@
                         <!--#endregion-->
 
                         <!--#region About Label-->
-                        <Label
+                        <Button
                             x:Name="AboutLabel"
                             Grid.Row="2"
+                            BackgroundColor="Transparent"
+                            Clicked="GoToAboutPage_Clicked"
                             FontSize="12"
                             HorizontalOptions="Center"
                             Text="ABOUT THE APP"
-                            VerticalOptions="End">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="GoToAboutPage_Clicked" />
-                            </Label.GestureRecognizers>
-                        </Label>
+                            VerticalOptions="End" />
                         <!--#endregion-->
 
                         <!--#region Page2 Buttons-->

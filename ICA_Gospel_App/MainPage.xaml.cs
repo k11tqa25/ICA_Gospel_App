@@ -16,7 +16,6 @@ namespace ICA_Gospel_App
                         splash = new SplashPage(this);
                         mainPageView = new MainPageView();
                         Navigation.PushAsync(mainPageView);
-                        //Navigation.InsertPageBefore(mainPageView, splash);
                         Navigation.PushAsync(splash);
 
                         MessagingCenter.Subscribe<AppEventMesseges>(this, AppEventMesseges.Resumed,
