@@ -11,17 +11,29 @@ namespace ICA_Gospel_App.Views
                 private bool isVideoControlShown = false;
                 private double startScale, currentScale;
 
+                private int animationNumber = 0;
 
                 public Section1_StoryView()
                 {
                         InitializeComponent();
                 }
 
+                private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+                {
+                        AnimationLabel aniLabel;
+                        if (animationNumber == 0)
+                        {
+                                aniLabel = new AnimationLabel();
+                                ContentLayout.Children.Add(aniLabel,3,1);
+                                aniLabel.StartAnimation();
+                        }
+                }
+
                 private async void PinchGestureRecognizer_PinchUpdated(object sender, PinchGestureUpdatedEventArgs e)
                 {
                         if (e.Status == GestureStatus.Started)
                         {
-                                startScale = testGrid.Scale;
+                                startScale = ContentLayout.Scale;
                         }
                         if (e.Status == GestureStatus.Running)
                         {
@@ -36,14 +48,14 @@ namespace ICA_Gospel_App.Views
                                 {
                                         await mViewContainer.PushViewAsync(new VideoControlView(),
                                                 DefaultAnimationBehavior.ScaleFromLargeAndFadeInOut,
-                                                otherAnimations: new Animation(v => testGrid.Scale = v, 1, currentScale, Easing.SinInOut));
+                                                otherAnimations: new Animation(v => ContentLayout.Scale = v, 1, currentScale, Easing.SinInOut));
                                         isVideoControlShown = true;
 
                                 }
                                 else if (currentScale > 1 && isVideoControlShown)
                                 {
                                         await mViewContainer.PopViewAsync(DefaultAnimationBehavior.ScaleFromLargeAndFadeInOut,
-                                                otherAnimation: new Animation(v => testGrid.Scale = v, startScale, 1, Easing.SinInOut));  
+                                                otherAnimation: new Animation(v => ContentLayout.Scale = v, startScale, 1, Easing.SinInOut));  
 
                                         isVideoControlShown = false;
                                 }

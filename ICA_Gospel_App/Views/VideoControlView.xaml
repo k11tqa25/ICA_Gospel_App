@@ -9,7 +9,8 @@
     mc:Ignorable="d">
     <views:NavigatableView.Resources>
         <Style TargetType="BoxView">
-            <Setter Property="BackgroundColor" Value="Gray" />
+            <Setter Property="BackgroundColor" Value="Black" />
+            <Setter Property="Opacity" Value=".8" />
         </Style>
         <Style TargetType="Grid">
             <Setter Property="ColumnSpacing" Value="0" />
@@ -18,34 +19,56 @@
     </views:NavigatableView.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="70" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="70" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="70" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="70" />
         </Grid.RowDefinitions>
 
+        <!--#region Frame-->
         <!--  Left  -->
         <BoxView Grid.RowSpan="3" />
 
         <!--  Top  -->
-        <BoxView Grid.ColumnSpan="3" />
+        <BoxView Grid.Column="1" />
 
         <!--  Right  -->
         <BoxView Grid.RowSpan="3" Grid.Column="2" />
 
         <!--  Bottom  -->
-        <BoxView Grid.Row="2" Grid.ColumnSpan="3" />
+        <BoxView Grid.Row="2" Grid.Column="1" />
 
         <!--  Center  -->
         <BoxView
             Grid.Row="1"
             Grid.Column="1"
-            BackgroundColor="Gray"
-            Opacity=".3" />
+            BackgroundColor="Black"
+            Opacity=".4" />
+
+        <!--#endregion-->
+
+        <!--#region  Buttons-->
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="0,0,0,10"
+            BackgroundColor="Transparent"
+            CornerRadius="40"
+            FontSize="30"
+            HeightRequest="60"
+            HorizontalOptions="Center"
+            Opacity=".8"
+            Text="▷"
+            TextColor="White"
+            VerticalOptions="Center"
+            WidthRequest="60" />
+
+        <!--#endregion-->
 
     </Grid>
 </views:NavigatableView>

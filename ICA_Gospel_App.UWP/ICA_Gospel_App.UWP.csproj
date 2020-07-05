@@ -164,6 +164,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="drawHeart.json" />
+    <None Include="heartCoolDown.json" />
+    <None Include="showUpBubble.json" />
     <None Include="SwitchOrientation.json" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

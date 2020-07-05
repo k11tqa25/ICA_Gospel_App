@@ -65,10 +65,13 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <BundleResource Include="drawHeart.json" />
     <None Include="Entitlements.plist" />
+    <BundleResource Include="heartCoolDown.json" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <BundleResource Include="SwitchOrientation.json" />
+    <BundleResource Include="showUpBubble.json" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

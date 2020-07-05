@@ -73,6 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\SwitchOrientation.json" />
+    <AndroidAsset Include="Assets\heartCoolDown.json" />
+    <AndroidAsset Include="Assets\drawHeart.json" />
+    <AndroidAsset Include="Assets\showUpBubble.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
