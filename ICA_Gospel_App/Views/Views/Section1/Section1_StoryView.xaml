@@ -22,6 +22,8 @@
                         ColumnSpacing="0"
                         HorizontalOptions="CenterAndExpand"
                         RowSpacing="0"
+                        Scale="2"
+                        TranslationX="-450"
                         VerticalOptions="CenterAndExpand">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -30,17 +32,17 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Label
+                            x:Name="ManLabel"
                             FontSize="60"
                             HorizontalOptions="Center"
                             Text="Man"
                             VerticalOptions="Center" />
                         <lottie:AnimationView
+                            x:Name="Heart"
                             Grid.Column="1"
                             Grid.ColumnSpan="2"
                             Animation="drawHeart.json"
-                            AutoPlay="True"
                             HeightRequest="100"
-                            Loop="True"
                             WidthRequest="100" />
                         <Label
                             Grid.Column="3"

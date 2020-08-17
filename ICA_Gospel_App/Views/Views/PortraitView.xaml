@@ -14,13 +14,13 @@
             <lottie:AnimationView
                 Animation="SwitchOrientation.json"
                 AutoPlay="True"
-                HeightRequest="300"
+                HeightRequest="200"
                 HorizontalOptions="Center"
                 Loop="True"
                 Rotation="90"
-                RotationY="20"
+                RotationY="180"
                 VerticalOptions="Center"
-                WidthRequest="300" />
+                WidthRequest="200" />
             <Label
                 HorizontalOptions="Center"
                 Text="Please change to landscape view."

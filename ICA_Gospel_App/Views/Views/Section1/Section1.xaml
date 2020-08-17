@@ -7,10 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:ICA_Gospel_App.Views"
     mc:Ignorable="d">
-    <Grid>
+    <Grid ColumnSpacing="0" RowSpacing="0">
         <views:ViewContainer x:Name="mViewContainer">
             <views:ViewContainer.ItemSource>
-                <views:Section1_StoryView />
+                <!--<views:Section1_StoryView />-->
+                <views:Section1_SkiaTest />
                 <views:SlideShowView />
             </views:ViewContainer.ItemSource>
         </views:ViewContainer>

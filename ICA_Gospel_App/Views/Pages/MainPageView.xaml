@@ -27,6 +27,7 @@
             IsVisible="True"
             Source="{Binding BackgroundMediaSource, Converter={StaticResource MediaConverter}}" />
 
+
         <!--  This is used to simulate the animation of the background media  -->
         <BoxView
             x:Name="Cover"
@@ -73,6 +74,7 @@
                             x:Name="Title"
                             Grid.Row="0"
                             VerticalOptions="End">
+
                             <Label
                                 FontSize="40"
                                 HorizontalOptions="Center"
@@ -84,6 +86,8 @@
                                 HorizontalOptions="Center"
                                 Text="powered by In Christ Alone"
                                 VerticalOptions="End" />
+
+
                         </StackLayout>
                         <!--#endregion-->
 

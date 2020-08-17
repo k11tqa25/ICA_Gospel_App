@@ -197,7 +197,7 @@ namespace ICA_Gospel_App.Views
                         Layout.IsVisible = true;
 
                         // Animations
-                        Cover.FadeTo(0, 1000, Easing.SinInOut);
+                        Cover.FadeTo(0, 2000, Easing.SinInOut);
                         BackgroundMedia.ScaleTo(1, 500, Easing.SinInOut);
                         Layout.FadeTo(1, 1000, Easing.SinInOut);
                         BackgroundMedia.Opacity = 1;

@@ -1,5 +1,4 @@
-﻿
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
@@ -15,8 +14,9 @@ namespace ICA_Gospel_App.Droid
                         ToolbarResource = Resource.Layout.Toolbar;
 
                         base.OnCreate(savedInstanceState);
-                                
+
                         Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+                        Xamarin.Forms.Forms.SetFlags(new string[] { "MediaElement_Experimental" });
                         global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
                         LoadApplication(new App());
                 }
